@@ -1,2 +1,5 @@
 fastapi
 uvicorn
+pydantic
+psycopg2
+boto3

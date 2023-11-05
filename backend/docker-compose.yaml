@@ -3,12 +3,12 @@ services:
   database:
     image: postgres
     ports:
-      - 5433:5432
+      - 5435:5433
     restart: always
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD : docker
-      POSTGRES_DB : mydb
+      POSTGRES_DB : mydbphoto
     volumes:
       - db-photo-upload-service:/var/lib/postgresql/data
   

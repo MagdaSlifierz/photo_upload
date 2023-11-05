@@ -1,24 +1,10 @@
-import uvicorn
-from fastapi import FastAPI, UploadFile
-import boto3
-import psycopg2
+from fastapi import APIRouter, UploadFile, File
+from models import PhotoModel
 from typing import List
-from pydantic import BaseModel
-
-S3_BUCKET_NAME = "test-photo-123"
-
-class PhotoModel(BaseModel):
-    id: int
-    photo_name: str
-    photo_url: str
-    is_deleted: bool
+# from s3bucket import 
 
 
-app = FastAPI(debug=True)
-
-@app.get('/status')
-async def check_status():
-    return "Hello World"
+router = APIRouter()
 
 @app.get("/photos", response_model=List[PhotoModel])
 async def get_all_photos():
@@ -68,6 +54,3 @@ async def add_photo(file: UploadFile):
     cur.close()
     conn.close()
 
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
