@@ -17,31 +17,48 @@ router = APIRouter()
 
 @router.get('/photos', response_model=List[PhotoModel])
 async def get_all_photos():
-    # connect to database
-    conn = psycopg2.connect(
-           database="mydbphoto", user="docker", password="docker", host="localhost", port="5433"
-    )
-    #create courser for the connection
-    cur = conn.cursor()
-    #execute query in descending order
-    cur.execute("SELECT * FROM photo ORDER BY id DESC")
-    rows = cur.fetchall()
-
-    # create return list iterate over thr list in database table
-    formatted_photo = []
-    for row in rows:
-        formatted_photo.append(
-            PhotoModel(
-                id=row[0],
-                photo_name=row[1],
-                photo_url=row[2],
-                is_deleted=row[3]
-
-            )
+    try:
+        # connect to the database
+        conn = psycopg2.connect(
+               database="mydbphoto", user="docker", password="docker", host="localhost", port="5433"
         )
-    cur.close()
-    conn.close()
-    return formatted_photo
+        # create cursor for the connection
+        cur = conn.cursor()
+        # execute query in descending order
+        cur.execute("SELECT * FROM photo ORDER BY photo_name")
+        rows = cur.fetchall()
+
+        # create a return list by iterating over the rows in the database table
+        formatted_photo = []
+        for row in rows:
+            # Add error handling to ensure the data is in the correct format
+            try:
+                photo_name = str(row[0])
+                photo_url = str(row[1])
+
+                # Check for None values before converting to the expected data types
+                if photo_name is not None:
+                    photo_name = str(photo_name)
+                if photo_url is not None:
+                    photo_url = str(photo_url)
+            
+                
+                formatted_photo.append(
+                    PhotoModel(
+                        photo_name=photo_name,
+                        photo_url=photo_url,
+                    )
+                )
+            except (ValueError, TypeError) as e:
+                # Handle invalid data in the database
+                logger.error(f"Invalid data in the database: {str(e)}")
+        cur.close()
+        conn.close()
+        return formatted_photo
+    except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
 
 KB = 1024
 MB = 1024 * KB
@@ -54,15 +71,15 @@ SUPPORTED_FILE_TYPES = {
 
 
 # Configure AWS credentials
-aws_access_key_id = '170589'
-aws_secret_access_key = '170589'
+aws_access_key_id = 'AKIATQT5BNHLFKPUQAOL'
+aws_secret_access_key = 's3sQNQxrXh5zZIv72ND9UzPFs41GyIb8WlbKIGBz'
 
 # Specify the AWS region
 aws_region = 'us-west-1'  # Replace with your desired region
 
 # Create an S3 client
 s3 = boto3.resource('s3', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
-S3_BUCKET_NAME = "photo-image-123"
+S3_BUCKET_NAME = "photo-123-magda"
 # s3 = boto3.resource('s3')
 bucket = s3.Bucket(S3_BUCKET_NAME)
 
