@@ -71,8 +71,8 @@ SUPPORTED_FILE_TYPES = {
 
 
 # Configure AWS credentials
-aws_access_key_id = 'AKIATQT5BNHLFKPUQAOL'
-aws_secret_access_key = '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'
+aws_access_key_id = '********************'
+aws_secret_access_key = '******************'
 
 # Specify the AWS region
 aws_region = 'us-west-1'  # Replace with your desired region
