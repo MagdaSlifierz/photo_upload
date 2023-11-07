@@ -15,7 +15,6 @@ import {
 
 import { useState, useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
-import { upload } from "@testing-library/user-event/dist/upload";
 
 function App() {
   const [isSelected, setIsSelected] = useState(false);
