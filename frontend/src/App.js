@@ -4,11 +4,8 @@ import {
   Heading,
   VStack,
   Button,
-  Input,
   HStack,
-  Container,
   SimpleGrid,
-  Box,
   Image,
   Spinner,
 } from "@chakra-ui/react";
@@ -24,7 +21,7 @@ function App() {
   const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/photos")
+    fetch("http://127.0.0.1:8001/photos")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -47,7 +44,7 @@ function App() {
     setShowSpinner(true);
     const formData = new FormData();
     formData.append("file", selectedFile, selectedFile.name);
-    fetch("http://127.0.0.1:8000/photos", {
+    fetch("http://127.0.0.1:8001/upload", {
       method: "POST",
       body: formData,
     })
@@ -91,6 +88,7 @@ function App() {
               allPhotos.map((photo) => {
                 return (
                   <Image
+                    key ={photo.photo_name}
                     borderRadius={25}
                     boxSize="300px"
                     src={photo["photo_url"]}
