@@ -71,8 +71,8 @@ SUPPORTED_FILE_TYPES = {
 
 
 # Configure AWS credentials
-aws_access_key_id = '********************'
-aws_secret_access_key = '******************'
+aws_access_key_id = '*************'
+aws_secret_access_key = '*********'
 
 # Specify the AWS region
 aws_region = 'us-west-1'  # Replace with your desired region
@@ -114,8 +114,9 @@ async def add_photo(file: UploadFile):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f'Unsupported file type: {file_type}. Supported types are {SUPPORTED_FILE_TYPES}'
             )
+        
         file_name = f'{uuid4()}.{SUPPORTED_FILE_TYPES[file_type]}'
-        uploaded_file_url = f"https://{S3_BUCKET_NAME}.s3.amazonaws.com/{file.filename}"
+        uploaded_file_url = f"https://{S3_BUCKET_NAME}.s3.amazonaws.com/{file_name}"
 
         conn = psycopg2.connect(
             database="mydbphoto", user="docker", password="docker", host="localhost", port="5433"

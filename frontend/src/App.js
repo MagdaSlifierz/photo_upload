@@ -88,7 +88,7 @@ function App() {
               allPhotos.map((photo) => {
                 return (
                   <Image
-                    key ={photo.photo_name}
+                    // key ={photo.photo_name}
                     borderRadius={25}
                     boxSize="300px"
                     src={photo["photo_url"]}
