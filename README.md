@@ -12,3 +12,11 @@ By doing this backend project, I enhanced my knowledge of web development, datab
 
 This flow outlines the process of handling file uploads from a frontend client to a FastAPI backend, including size and type validation, and subsequently storing the file in an AWS S3 bucket.
 <img width="1038" alt="Screenshot 2023-11-04 at 10 03 42 PM" src="https://github.com/MagdaSlifierz/photo_upload/assets/49603115/b524cd11-6ccc-47a9-b1c6-0dc110bd34b2">
+
+## Frontend
+
+<img width="1440" alt="Screenshot 2023-11-07 at 6 43 36 PM" src="https://github.com/MagdaSlifierz/photo_upload/assets/49603115/168c8225-c687-410c-a73d-579f26254299">
+
+## Database
+
+<img width="1440" alt="Screenshot 2023-11-07 at 6 44 17 PM" src="https://github.com/MagdaSlifierz/photo_upload/assets/49603115/7677ecc8-7d9d-49a0-a0ee-6fb03c1eefcd">
